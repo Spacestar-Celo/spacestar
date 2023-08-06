@@ -6,10 +6,7 @@ import './index.css'
 
 //wallet import
 import {
-  getDefaultWallets,
-  connectorsForWallets,
   RainbowKitProvider,
-  midnightTheme,
   lightTheme
 } from "@rainbow-me/rainbowkit";
 
@@ -26,11 +23,6 @@ import "@rainbow-me/rainbowkit/styles.css";
 const { chains, publicClient, } = configureChains(
   [Celo, Alfajores],
   [
-    // jsonRpcProvider({
-    //   rpc: (Celo, celoAlfajores) => ({
-    //     http: import.meta.env.VITE_CELO_RPC_ENDPOINT,
-    //   }),
-    // }),
 
     jsonRpcProvider({
       rpc: (chain) => ({ http: chain.rpcUrls.default.http[0] }),

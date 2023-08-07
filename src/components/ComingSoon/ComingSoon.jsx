@@ -38,14 +38,23 @@ const Commingsoon = () => {
         Congratulation!!! You've earned: <b>{Number(data)}</b> Spacestar Points
       </h3>
       <p style={{marginBottom: '20px'}}>
-        You'll be able to swap your Spacestar point to $SPACESTAR community Token upon our Mainnet Launch <br /> 
+        You'll be able to swap your Spacestar point to $SPACESTAR community Token and <br/>
+        receive 1:1 airdrop upon our Mainnet Launch <br /> 
         For now keep contributing and keep earning those point incentive.
       </p>
+      
       <Link to='/dashboard'>
       <div className='commingsoon-btn'>
         <Button content='Back To Dashboard'/>
       </div>
       </Link>
+
+      <Link to='/donate'>
+      <div className='commingsoon-btn'>
+        <Button content='Support Us'/>
+      </div>
+      </Link>
+
     </div>
   )
 }

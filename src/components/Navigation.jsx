@@ -3,16 +3,15 @@ import { GiExitDoor } from "react-icons/gi"
 import { 
     AiFillHome, 
     AiFillWechat, 
-    AiFillMoneyCollect 
 } from "react-icons/ai"   
 
 import { 
-    BiBitcoin 
+    BiBitcoin,
+    BiDonateBlood
 } from "react-icons/bi" 
 import styled from 'styled-components';
 import { ButtonContainer } from '../styled/Button';
 import { useChat } from '../context/ChatProvider';
-import { LoginButton } from '../connect-wallet/connectButton';
 
 const Nav = styled.nav`
     display: flex;
@@ -67,6 +66,13 @@ const Navigation = ({ openRoomNav }) => {
                     </a>
             </ButtonContainer>
             <p><b>Claim </b></p>
+
+            <ButtonContainer active={true}>
+                    <a href="/claim">
+                        <BiDonateBlood size='100%' />
+                    </a>
+            </ButtonContainer>
+            <p><b>Donate </b></p>
     
 
             <ButtonContainer active={true}  onClick={ leaveClickHandler }>

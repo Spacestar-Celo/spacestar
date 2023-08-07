@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Commingsoon from './ComingSoon/ComingSoon';
-import { LoginButton } from '../connect-wallet/connectButton';
 
 const GlobalStyle = createGlobalStyle`
   :root {

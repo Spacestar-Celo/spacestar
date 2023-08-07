@@ -2,7 +2,6 @@ import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { ChatProvider } from '../context/ChatProvider';
 import Wrapper from './Wrapper';
-import { LoginButton } from '../connect-wallet/connectButton';
 
 const GlobalStyle = createGlobalStyle`
   :root {

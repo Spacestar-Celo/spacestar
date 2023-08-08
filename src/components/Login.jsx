@@ -16,7 +16,7 @@ const LoginContainer = styled.form`
     & button {
         display: flex;
         padding: 10px 20px;
-        border: none;
+        border: none; 
         border-radius: 100px;
         background: var(--blue-active-color);
         transition: .3s ease-in-out opacity, box-shadow;

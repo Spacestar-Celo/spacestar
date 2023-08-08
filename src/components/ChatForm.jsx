@@ -39,32 +39,36 @@ const ChatForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const message = inputRef.current.value;
-    setChatMessage(message);
+    if (chatMessage.trim() === '') {
+      return; // Prevent sending empty messages
+    }
 
-    inputRef.current.value = '';
-    inputRef.current.focus();
+    setChatMessage(''); // Clear input after submitting
 
-    console.log(message);
     if (write) {
       write();
     }
   };
 
+
   return (
     <MessageForm onSubmit={onSubmit}>
-      <input type="text" placeholder='Share your Story or Contribute here' ref={inputRef} />
+      <input
+        type="text"
+        placeholder="Share your Story or Contribute here"
+        value={chatMessage}
+        onChange={(e) => setChatMessage(e.target.value)}
+      />
 
       <ButtonContainer flex="0" padding="0" active={true} size="2.2em" borderRadius="50%">
-        <button onClick={onSubmit} disabled={isLoading}>
-          {isLoading ? <Spinner 
-            speed='0.65s'
-            color='blue'
-            size='xl'
-          /> : <IoIosSend fill='#fff' />}
+        <button onClick={onSubmit} disabled={isLoading || chatMessage.trim() === ''}>
+          {isLoading ? (
+            <Spinner speed="0.65s" color="blue" size="xl" />
+          ) : (
+            <IoIosSend fill="#fff" />
+          )}
         </button>
       </ButtonContainer>
-      
     </MessageForm>
   );
 };

@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { getFirstLetter } from '../helper';
+import { getFirstLetter, getUser } from '../helper';
 import { useContractRead } from 'wagmi'
 import {ContractABI} from '../utils/SpacestarABI'
 import { useChat } from '../context/ChatProvider';
 import { useAccount } from 'wagmi';
+import { generateAvatarUrl } from '../utils/avatarGenerator';
 
 const ConversationContainer = styled.div`
   display: flex;
@@ -32,17 +33,11 @@ const MessageContainer = styled.div`
   flex-direction: ${(props) => (props.incomingMessage ? 'row' : 'row-reverse')};
 
   ${MessageContent} {
-    background: ${(props) =>
-      props.incomingMessage ? 'var(--blue-gradient)' : '#fff'};
-    border: ${(props) =>
-      props.incomingMessage ? 'none' : '1px solid rgba(0, 0, 0, 0.1)'};
+    background: ${(props) => (props.incomingMessage ? 'var(--blue-gradient)' : '#fff')};
+    border: ${(props) => (props.incomingMessage ? 'none' : '1px solid rgba(0, 0, 0, 0.1)')};
     color: ${(props) => (props.incomingMessage ? '#fff' : '#000')};
-    box-shadow: ${(props) =>
-      props.incomingMessage
-        ? 'rgba(32, 112, 198, 0.4)'
-        : 'rgba(0, 0, 0, 0.15)'} 2px 3px 15px;
-    border-radius: ${(props) =>
-      props.incomingMessage ? '0 8px 8px 8px' : '8px 0 8px 8px'};
+    box-shadow: ${(props) => (props.incomingMessage ? 'rgba(32, 112, 198, 0.4)' : 'rgba(0, 0, 0, 0.15)')} 2px 3px 15px;
+    border-radius: ${(props) => (props.incomingMessage ? '0 8px 8px 8px' : '8px 0 8px 8px')};
   }
 `;
 
@@ -52,7 +47,7 @@ const UserProfile = styled.div`
   height: 100%;
 
   &::before {
-    content: '${(props) => getFirstLetter(props.content)}';
+    content: '';
     display: grid;
     place-content: center;
     padding: 0.5em;
@@ -60,6 +55,8 @@ const UserProfile = styled.div`
     height: 1.3em;
     border-radius: 50%;
     background: var(--secondry-color-dark-palette);
+    background-image: url('${(props) => generateAvatarUrl(props.content)}');
+    background-size: cover;
   }
 `;
 
@@ -74,6 +71,8 @@ const BotMessage = styled.div`
 `;
 
 const Conversation = () => {
+
+  const [chatMessages, setChatMessages] = useState([]);
   const { currentRoom } = useChat();
   const chatConversation = useRef(null);
   const { address, isConnected } = useAccount();
@@ -90,6 +89,12 @@ const Conversation = () => {
   });
 
   useEffect(() => {
+    if (data) {
+      setChatMessages(data);
+    }
+  }, [data]);
+
+  useEffect(() => {
     const conversationRef = chatConversation.current;
 
     if (conversationRef) {
@@ -98,7 +103,7 @@ const Conversation = () => {
     return () => {
    
       };
-    }, [data]);
+    }, [chatMessages]);
 
   if (!groupName) {
     return <div> <MessageContainer>{"Please select a group"}</MessageContainer></div>;
@@ -114,7 +119,7 @@ return <div> <MessageContainer>{"Loading..."}</MessageContainer></div>;
 
   return (
     <ConversationContainer ref={chatConversation}>
-      {data.map((m, index) => {
+      {chatMessages.map((m, index) => {
         const { chatMessage, user } = m;
         return (
           <MessageContainer

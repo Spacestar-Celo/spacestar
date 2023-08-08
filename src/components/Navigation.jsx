@@ -45,7 +45,7 @@ const Navigation = ({ openRoomNav }) => {
        
         
         <Nav>
-            <ButtonContainer active={true} >
+            <ButtonContainer active='true' >
                     <a href="/">
                         <AiFillHome size='100%' />
                     </a>
@@ -60,15 +60,15 @@ const Navigation = ({ openRoomNav }) => {
             </ButtonContainer>
 
 
-            <ButtonContainer active={true}>
+            <ButtonContainer active='true'>
                     <a href="/claim">
                         <BiBitcoin  size='100%' />
                     </a>
             </ButtonContainer>
             <p><b>Claim </b></p>
 
-            <ButtonContainer active={true}>
-                    <a href="/claim">
+            <ButtonContainer active='true'>
+                    <a href="/donate">
                         <BiDonateBlood size='100%' />
                     </a>
             </ButtonContainer>

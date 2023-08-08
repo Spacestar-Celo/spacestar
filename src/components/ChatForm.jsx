@@ -41,33 +41,37 @@ const ChatForm = () => {
 
   const { data, isLoading, isSuccess, write } = useContractWrite(config);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+const onSubmit = (e) => {
+  e.preventDefault();
 
-    const message = inputRef.current.value;
-    setChatMessage(message);
+  if (chatMessage.trim() === "") {
+    return; // Prevent sending empty messages
+  }
 
-    inputRef.current.value = "";
-    inputRef.current.focus();
+  setChatMessage(""); // Clear input after submitting
 
-    console.log(message);
-    if (write) {
-      write();
-    }
-  };
+  if (write) {
+    write();
+  }
+};
+
 
   return (
     <MessageForm onSubmit={onSubmit}>
       <input
         type="text"
         placeholder="Share your Story or Contribute here"
-        ref={inputRef}
+        value={chatMessage}
+        onChange={(e) => setChatMessage(e.target.value)}
       />
 
       {/* <ButtonContainer flex="0" padding="0" active="true" size="2.2em"> */}
-      <Button onClick={onSubmit} disabled={isLoading}>
+      <Button
+        onClick={onSubmit}
+        disabled={isLoading || chatMessage.trim() === ""}
+      >
         {isLoading ? (
-          <Spinner speed="0.65s" color="blue" size="xl" />
+          <Spinner speed="0.65s" color="blue" size = "lg" />
         ) : (
           <IoIosSend fill="blue" size="1.5em" />
         )}

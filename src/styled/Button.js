@@ -27,9 +27,8 @@ export const ButtonContainer = styled.div`
           props.borderRadius ? props.borderRadius : "0.3em"};
         background: ${(props) =>
           props.active
-            ? 
-            // "var(--blue-active-color)"
-            'white'
+            ? // "var(--blue-active-color)"
+              "white"
             : "var(--secondry-color-dark-palette)"};
         box-shadow: ${(props) =>
           props.active ? "rgba(32, 112, 198, 0.7) 0 0 10px" : null};
@@ -53,17 +52,12 @@ export const ButtonContainer = styled.div`
         color: #194185;
         margin-left: 0.5em;
         font-size: 0.9em;
+        fill: ${(props) => (props.active ? "#194185" : "#737373")};
         // color:  "#737373"
     }
 
     & a p{
     color: #194185;
-    }
-    
-    & button:hover, a:hover {
-        background: var(--blue-active-color);
-        box-shadow: rgba(32, 112, 198, 0.7) 0 0 10px;
-        opacity: 0.8;
     }
 
     & a:hover svg {

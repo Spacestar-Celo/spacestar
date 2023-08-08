@@ -16,10 +16,13 @@ const RoomListContainer = styled.div`
   height: 100%;
   padding-top: var(--vertical-padding);
   overflow: auto;
-  border-top-left-radius: 45px;
-  border-bottom-left-radius: 45px;
+  // border-top-left-radius: 45px;
+  // border-bottom-left-radius: 45px;
   background: var(--blue-gradient);
   color: #fff;
+  position: absolute;
+  right: 0%;
+
 
   & h3 {
     font-size: 1.2em;
@@ -136,7 +139,7 @@ const RoomList = ({ query, isNavOpen, setIsNavOpen }) => {
   const debouncedSearch = useDebounce(query, 350);
   const { currentRoom, setCurrentRoom, userName } = useChat();
 
-  const { isOpen, setIsOpen, openMenu, closeMenu } = useContext(ChatContext);
+  const { isOpen, setIsRoomOpen, isRoomOpen } = useContext(ChatContext);
 
   const filteredRooms = useMemo(() => {
     const filter = rooms.filter((room) => {
@@ -163,11 +166,11 @@ const RoomList = ({ query, isNavOpen, setIsNavOpen }) => {
 
     const selectedRoom = rooms.find((room) => room.id === roomID);
     setCurrentRoom(selectedRoom);
-    setIsNavOpen(false);
+    // setIsNavOpen(false);
   };
 
   return (
-    <RoomListContainer open={isNavOpen}>
+    <RoomListContainer>
       <Room>
         <h3>
           <b>Help Rooms</b>
@@ -175,7 +178,7 @@ const RoomList = ({ query, isNavOpen, setIsNavOpen }) => {
         <GiHamburgerMenu
           size="25px"
           onClick={() => {
-            setIsOpen(!openMenu);
+            setIsRoomOpen(!isRoomOpen);
           }}
         />
       </Room>
@@ -189,7 +192,7 @@ const RoomList = ({ query, isNavOpen, setIsNavOpen }) => {
               //   active={currentRoom?.id === id}
               key={id}
               onClick={() => {
-                setIsOpen(false);
+                setIsRoomOpen(false);
                 handleRoomClick(id);
               }}
             >

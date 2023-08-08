@@ -1,4 +1,4 @@
-import React ,{useContext}from "react";
+import React, { useContext } from "react";
 import { BiReset } from "react-icons/bi";
 import styled from "styled-components";
 import { ButtonContainer } from "../styled/Button";
@@ -13,7 +13,7 @@ const SearchRoomsMain = styled.div`
   align-items: center;
   padding-left: 10px;
   padding-right: 10px;
-  padding:10px
+  padding: 10px;
 `;
 
 const SearchRoomsContainer = styled.div`
@@ -36,20 +36,33 @@ const SearchRoomsContainer = styled.div`
   }
 `;
 
-const RightAlignedDiv = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: 30px;
+const GiHamburger = styled.div`
+  visibility: hidden;
+
+  @media (max-width: 820px) {
+    visibility: visible;
+  }
+`;
+
+const ViewRoom = styled.button`
+  padding: 10px 20px;
+  background: #194185;
+  border: none;
+  color: #ffffffd8;
+  border-radius: 5px;
 `;
 
 const SearchRooms = ({ query, setQuery }) => {
-
-  const { isOpen, setIsOpen, openMenu, closeMenu } = useContext(ChatContext);
+  const { isMenuOpen, openMenu, closeMenu, setIsRoomOpen, isRoomOpen, setIsMenuOpen} = useContext(ChatContext);
 
   return (
     <SearchRoomsMain>
-      <GiHamburgerMenu size="25px" />
-      <SearchRoomsContainer >
+      <GiHamburger>
+        <GiHamburgerMenu size="25px" onClick={()=>{
+          setIsMenuOpen(!isMenuOpen)
+        }}/>
+      </GiHamburger>
+      <SearchRoomsContainer>
         <input
           type="text"
           placeholder="Search Group"
@@ -63,9 +76,13 @@ const SearchRooms = ({ query, setQuery }) => {
         </a>
         {/* </ButtonContainer> */}
       </SearchRoomsContainer>
-      <button onClick={()=>{
-        setIsOpen(true)
-      }}>Open Rooms</button>
+      <ViewRoom
+        onClick={() => {
+          setIsRoomOpen(true);
+        }}
+      >
+        Open Rooms
+      </ViewRoom>
     </SearchRoomsMain>
   );
 };

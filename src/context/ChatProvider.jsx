@@ -10,24 +10,27 @@ export const ChatProvider = ({ children }) => {
     const [userName, setUserName] = useState('');
     const [currentRoom, setCurrentRoom] = useState(null);
     const [messages, setMessages] = useState('')
-    const [isOpen, setIsOpen] = useState(false)
+    const [isRoomOpen, setIsRoomOpen] = useState(false)
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-     const openMenu = () => {
-       setIsOpen(true);
-     };
-     const closeMenu = () => {
-       setIsOpen(false);
-     };
+    //  const openMenu = () => {
+    //    setIsMenuOpen(true);
+    //  };
+    //  const openMainMenu = () => {
+    //    setIsOpen(true);
+    //  };
+    //  const closeMenu = () => {
+    //    setIsMenuOpen(false);
+    //  };
 
     const value = {
       userName,
       setUserName,
       setCurrentRoom,
       currentRoom,
-      isOpen,
-      setIsOpen,
-      openMenu,
-      closeMenu,
+      isRoomOpen, setIsRoomOpen,
+      isMenuOpen,
+      setIsMenuOpen,
     };
 
    

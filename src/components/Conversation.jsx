@@ -89,6 +89,8 @@ const Conversation = () => {
 
   });
 
+  console.log(data)
+
   useEffect(() => {
     const conversationRef = chatConversation.current;
 
@@ -119,7 +121,7 @@ return <div> <MessageContainer>{"Loading..."}</MessageContainer></div>;
         return (
           <MessageContainer
             key={index}
-            incomingMessage={user !== address}
+            incomingmessage={user !== address}
           >
             <UserProfile content={user} />
             <MessageContent>{chatMessage}</MessageContent>

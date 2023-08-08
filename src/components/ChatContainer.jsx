@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import styled from 'styled-components';
 import RoomList from './RoomList';
 import ChatForm from './ChatForm';
@@ -8,30 +8,30 @@ import SearchRooms from './SearchRooms';
 import { useChat } from '../context/ChatProvider';
 import { Description } from '../styled/Description';
 import { LoginButton } from '../connect-wallet/connectButton';
+import { ChatContext } from "../context/ChatProvider";
 
 const ChatAppContainer = styled.div`
-    --vertical-padding: 3vh;
+  --vertical-padding: 3vh;
 
-    display: flex;
-    gap: 2vw;
-    height: 80vh;
-    width: 80vw;
-    justify-content: space-between;
-    background: #194185;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-                rgba(0, 0, 0, 0.12) 0px -12px 30px,
-                rgba(0, 0, 0, 0.12) 0px 4px 6px,
-                rgba(0, 0, 0, 0.17) 0px 12px 13px,
-                rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  display: flex;
+  gap: 1vw;
+  height: 100vh;
+  width: 100vw;
+  justify-content: space-between;
+//   background: #194185;
+  background: #ebe8e8;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
-    @media (max-width: 820px) {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        flex-direction: column-reverse;
-        font-size: 0.85rem;
-        gap: 0;
-    }
+  @media (max-width: 820px) {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column-reverse;
+    font-size: 0.85rem;
+    gap: 0;
+  }
 `;
 
 const CenterContainer = styled.div`
@@ -41,7 +41,7 @@ const CenterContainer = styled.div`
     flex-direction: column;
     height: 100%;
     margin: auto 0;
-    padding: 3vw 1vw;
+    padding: 1vw 1vw;
 
     @media (max-width: 820px) {
         height: 80%;
@@ -56,7 +56,7 @@ const Chat = styled.div`
     flex-direction: column;
     height: 80%;
     background: #fff;
-    border-radius: 30px;
+    border-radius: 10px;
 
     @media (max-width: 820px) {
         margin: 0 2.5vw;
@@ -94,8 +94,11 @@ const ChatContainer = () => {
     const [isNavOpen, setIsNavOpen] = useState();
     const { currentRoom } = useChat();
 
+  const { isOpen, toggle, openMenu, closeMenu } = useContext(ChatContext);
+
+
     return (
-        <ChatAppContainer>
+        <ChatAppContainer >
             
             <Navigation openRoomNav={ () => setIsNavOpen(true) } />
 
@@ -128,11 +131,20 @@ const ChatContainer = () => {
                 </Chat>
             </CenterContainer>
 
-            <RoomList 
+            {isOpen ? <RoomList 
+                query={ query }
+                // isNavOpen={ isNavOpen }
+                // setIsNavOpen={ setIsNavOpen }
+                active ={true}
+            /> : null}
+
+            {/* <RoomList 
                 query={ query }
                 isNavOpen={ isNavOpen }
                 setIsNavOpen={ setIsNavOpen }
-            />
+                active ={true}
+            /> */}
+
         </ChatAppContainer>
     );
 };

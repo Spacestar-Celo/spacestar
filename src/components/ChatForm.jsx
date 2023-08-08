@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react';
-import styled from 'styled-components';
-import { IoIosSend } from 'react-icons/io';
-import { Spinner } from '@chakra-ui/react';
-import { ButtonContainer } from '../styled/Button';
-import { useChat } from '../context/ChatProvider';
-import { useContractWrite, usePrepareContractWrite } from 'wagmi';
-import { ContractABI } from '../utils/SpacestarABI';
+import React, { useRef, useState } from "react";
+import styled from "styled-components";
+import { IoIosSend } from "react-icons/io";
+import { Spinner } from "@chakra-ui/react";
+import { ButtonContainer } from "../styled/Button";
+import { useChat } from "../context/ChatProvider";
+import { useContractWrite, usePrepareContractWrite } from "wagmi";
+import { ContractABI } from "../utils/SpacestarABI";
 
 const MessageForm = styled.form`
   padding: 0.5vw 0;
@@ -22,15 +22,20 @@ const MessageForm = styled.form`
   }
 `;
 
+const Button = styled.button`
+border: none;
+background: transparent;
+`;
+
 const ChatForm = () => {
   const inputRef = useRef(null);
   const { currentRoom } = useChat();
-  const [chatMessage, setChatMessage] = useState('');
+  const [chatMessage, setChatMessage] = useState("");
 
   const { config } = usePrepareContractWrite({
     address: import.meta.env.VITE_CELO_CONTRACT,
     abi: ContractABI,
-    functionName: 'sendChatMessage',
+    functionName: "sendChatMessage",
     args: [chatMessage, currentRoom?.name],
   });
 
@@ -42,7 +47,7 @@ const ChatForm = () => {
     const message = inputRef.current.value;
     setChatMessage(message);
 
-    inputRef.current.value = '';
+    inputRef.current.value = "";
     inputRef.current.focus();
 
     console.log(message);
@@ -53,18 +58,21 @@ const ChatForm = () => {
 
   return (
     <MessageForm onSubmit={onSubmit}>
-      <input type="text" placeholder='Share your Story or Contribute here' ref={inputRef} />
+      <input
+        type="text"
+        placeholder="Share your Story or Contribute here"
+        ref={inputRef}
+      />
 
-      <ButtonContainer flex="0" padding="0" active={true} size="2.2em" borderRadius="50%">
-        <button onClick={onSubmit} disabled={isLoading}>
-          {isLoading ? <Spinner 
-            speed='0.65s'
-            color='blue'
-            size='xl'
-          /> : <IoIosSend fill='#fff' />}
-        </button>
-      </ButtonContainer>
-      
+      {/* <ButtonContainer flex="0" padding="0" active="true" size="2.2em"> */}
+      <Button onClick={onSubmit} disabled={isLoading}>
+        {isLoading ? (
+          <Spinner speed="0.65s" color="blue" size="xl" />
+        ) : (
+          <IoIosSend fill="blue" size="1.5em" />
+        )}
+      </Button>
+      {/* </ButtonContainer> */}
     </MessageForm>
   );
 };

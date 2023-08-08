@@ -8,9 +8,9 @@ import Soon from '../src//pages/Soon/Soon';
 function App() {
   return (
     <>
-      {/* <Home /> */}
-      {/* <ComingSoon /> */}
-      {/* <Soon/> */}
+      {/* <Home />
+      <ComingSoon />
+      <Soon/> */}
       <Navroutes/>
     </>
   );

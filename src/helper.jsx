@@ -24,3 +24,27 @@ export const getFirstLetter = (name) => {
 
     return firstLetters;
 }
+
+export const getUser = (name) => {
+    const lettersArray = name
+      .split(' ')
+      .map(word => {
+        const randomIndex = Math.floor(Math.random() * word.length);
+        const randomChar = word[randomIndex];
+  
+        // Check if the character is a letter or a number
+        if (isNaN(randomChar)) {
+          return randomChar.toUpperCase();
+        } else {
+          return randomChar;
+        }
+      });
+  
+    if (lettersArray.length === 1) {
+      return lettersArray[0];
+    }
+  
+    const userLetters = [lettersArray[0], lettersArray[lettersArray.length - 1]].join('');
+    return userLetters;
+  };
+  

@@ -23,8 +23,8 @@ const MessageForm = styled.form`
 `;
 
 const Button = styled.button`
-border: none;
-background: transparent;
+  border: none;
+  background: transparent;
 `;
 
 const ChatForm = () => {
@@ -41,20 +41,17 @@ const ChatForm = () => {
 
   const { data, isLoading, isSuccess, write } = useContractWrite(config);
 
-const onSubmit = (e) => {
-  e.preventDefault();
+  const onSubmit = (e) => {
+    e.preventDefault();
 
-  if (chatMessage.trim() === "") {
-    return; // Prevent sending empty messages
-  }
-
-  setChatMessage(""); // Clear input after submitting
-
-  if (write) {
-    write();
-  }
-};
-
+    if (chatMessage.trim() === "") {
+      return; // Prevent sending empty messages
+    }
+    setChatMessage(""); // Clear input after submitting
+    if (write) {
+      write();
+    }
+  };
 
   return (
     <MessageForm onSubmit={onSubmit}>
@@ -71,7 +68,7 @@ const onSubmit = (e) => {
         disabled={isLoading || chatMessage.trim() === ""}
       >
         {isLoading ? (
-          <Spinner speed="0.65s" color="blue" size = "lg" />
+          <Spinner speed="0.65s" color="blue" size="lg" />
         ) : (
           <IoIosSend fill="blue" size="1.5em" />
         )}

@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { getFirstLetter } from '../helper';
+import { getFirstLetter, getUser } from '../helper';
 import { useContractRead } from 'wagmi'
 import {ContractABI} from '../utils/SpacestarABI'
 import { useChat } from '../context/ChatProvider';
 import { useAccount } from 'wagmi';
+import { generateAvatarUrl } from '../utils/avatarGenerator';
 
 const ConversationContainer = styled.div`
   display: flex;
@@ -77,7 +78,7 @@ const UserProfile = styled.div`
   height: 100%;
 
   &::before {
-    content: "";
+    content: '';
     display: grid;
     place-content: center;
     padding: 0.5em;
@@ -85,6 +86,7 @@ const UserProfile = styled.div`
     height: 1.3em;
     border-radius: 50%;
     background: var(--secondry-color-dark-palette);
+    background-image: url('${(props) => generateAvatarUrl(props.content)}');
     background-size: cover;
   }
 `;
@@ -101,6 +103,8 @@ const BotMessage = styled.div`
 `;
 
 const Conversation = () => {
+
+  const [chatMessages, setChatMessages] = useState([]);
   const { currentRoom } = useChat();
   const chatConversation = useRef(null);
   const { address, isConnected } = useAccount();
@@ -116,7 +120,11 @@ const Conversation = () => {
 
   });
 
-  console.log(data)
+  useEffect(() => {
+    if (data) {
+      setChatMessages(data);
+    }
+  }, [data]);
 
   useEffect(() => {
     const conversationRef = chatConversation.current;
@@ -127,7 +135,7 @@ const Conversation = () => {
     return () => {
    
       };
-    }, [data]);
+    }, [chatMessages]);
 
   if (!groupName) {
     return <div> <MessageContainer>{"Please select a group"}</MessageContainer></div>;
@@ -144,7 +152,7 @@ return <div> <MessageContainer>{"Loading..."}</MessageContainer></div>;
 
   return (
     <ConversationContainer ref={chatConversation}>
-      {data.map((m, index) => {
+      {chatMessages.map((m, index) => {
         const { chatMessage, user } = m;
 
         if(user!==address){

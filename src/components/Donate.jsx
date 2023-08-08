@@ -3,7 +3,7 @@ function Donate() {
     return (
       <>
 
-      <h3>This will be the support page!</h3>
+      <h3>This will be the support us page!</h3>
   
       </>
     );

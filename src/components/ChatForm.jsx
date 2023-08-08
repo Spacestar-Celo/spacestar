@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react';
-import styled from 'styled-components';
-import { IoIosSend } from 'react-icons/io';
-import { Spinner } from '@chakra-ui/react';
-import { ButtonContainer } from '../styled/Button';
-import { useChat } from '../context/ChatProvider';
-import { useContractWrite, usePrepareContractWrite } from 'wagmi';
-import { ContractABI } from '../utils/SpacestarABI';
+import React, { useRef, useState } from "react";
+import styled from "styled-components";
+import { IoIosSend } from "react-icons/io";
+import { Spinner } from "@chakra-ui/react";
+import { ButtonContainer } from "../styled/Button";
+import { useChat } from "../context/ChatProvider";
+import { useContractWrite, usePrepareContractWrite } from "wagmi";
+import { ContractABI } from "../utils/SpacestarABI";
 
 const MessageForm = styled.form`
   padding: 0.5vw 0;
@@ -22,49 +22,61 @@ const MessageForm = styled.form`
   }
 `;
 
+const Button = styled.button`
+border: none;
+background: transparent;
+`;
+
 const ChatForm = () => {
   const inputRef = useRef(null);
   const { currentRoom } = useChat();
-  const [chatMessage, setChatMessage] = useState('');
+  const [chatMessage, setChatMessage] = useState("");
 
   const { config } = usePrepareContractWrite({
     address: import.meta.env.VITE_CELO_CONTRACT,
     abi: ContractABI,
-    functionName: 'sendChatMessage',
+    functionName: "sendChatMessage",
     args: [chatMessage, currentRoom?.name],
   });
 
   const { data, isLoading, isSuccess, write } = useContractWrite(config);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+const onSubmit = (e) => {
+  e.preventDefault();
 
-    const message = inputRef.current.value;
-    setChatMessage(message);
+  if (chatMessage.trim() === "") {
+    return; // Prevent sending empty messages
+  }
 
-    inputRef.current.value = '';
-    inputRef.current.focus();
+  setChatMessage(""); // Clear input after submitting
 
-    console.log(message);
-    if (write) {
-      write();
-    }
-  };
+  if (write) {
+    write();
+  }
+};
+
 
   return (
     <MessageForm onSubmit={onSubmit}>
-      <input type="text" placeholder='Share your Story or Contribute here' ref={inputRef} />
+      <input
+        type="text"
+        placeholder="Share your Story or Contribute here"
+        value={chatMessage}
+        onChange={(e) => setChatMessage(e.target.value)}
+      />
 
-      <ButtonContainer flex="0" padding="0" active={true} size="2.2em" borderRadius="50%">
-        <button onClick={onSubmit} disabled={isLoading}>
-          {isLoading ? <Spinner 
-            speed='0.65s'
-            color='blue'
-            size='xl'
-          /> : <IoIosSend fill='#fff' />}
-        </button>
-      </ButtonContainer>
-      
+      {/* <ButtonContainer flex="0" padding="0" active="true" size="2.2em"> */}
+      <Button
+        onClick={onSubmit}
+        disabled={isLoading || chatMessage.trim() === ""}
+      >
+        {isLoading ? (
+          <Spinner speed="0.65s" color="blue" size = "lg" />
+        ) : (
+          <IoIosSend fill="blue" size="1.5em" />
+        )}
+      </Button>
+      {/* </ButtonContainer> */}
     </MessageForm>
   );
 };

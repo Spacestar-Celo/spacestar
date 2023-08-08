@@ -2,6 +2,8 @@ import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { ChatProvider } from '../context/ChatProvider';
 import Wrapper from './Wrapper';
+import Navbar from './Navbar/Navbar';
+import { LoginButton } from '../connect-wallet/connectButton';
 
 const GlobalStyle = createGlobalStyle`
   :root {
@@ -64,6 +66,8 @@ function Dashboard() {
       <Background />
       {/* <div><LoginButton /></div> */}
 
+
+        {/* <Navbar/> */}
       <ChatProvider>  
         <Wrapper />
       </ChatProvider>

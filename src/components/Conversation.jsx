@@ -12,7 +12,27 @@ const ConversationContainer = styled.div`
   gap: 1vh;
   flex: 1;
   padding: 20px 0;
-  overflow: auto;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+  }
 `;
 
 const MessageContent = styled.div`
@@ -22,6 +42,8 @@ const MessageContent = styled.div`
   padding: 0.8em 1em;
   width: fit-content;
   height: fit-content;
+  
+  
 `;
 
 const MessageContainer = styled.div`
@@ -29,22 +51,25 @@ const MessageContainer = styled.div`
   gap: 20px;
   color: #fff;
   font-size: 1rem;
-  flex-direction: ${(props) => (props.incomingMessage ? 'row' : 'row-reverse')};
+  padding-right: 1.5em;
+  flex-direction: ${(props) => (props.incomingMessage ? "row" : "row-reverse")};
 
   ${MessageContent} {
     background: ${(props) =>
-      props.incomingMessage ? 'var(--blue-gradient)' : '#fff'};
+      props.incomingMessage ? "var(--blue-gradient)" : "#fff"};
     border: ${(props) =>
-      props.incomingMessage ? 'none' : '1px solid rgba(0, 0, 0, 0.1)'};
-    color: ${(props) => (props.incomingMessage ? '#fff' : '#000')};
+      props.incomingMessage ? "none" : "1px solid rgba(0, 0, 0, 0.1)"};
+    color: ${(props) => (props.incomingMessage ? "#fff" : "#000")};
     box-shadow: ${(props) =>
-      props.incomingMessage
-        ? 'rgba(32, 112, 198, 0.4)'
-        : 'rgba(0, 0, 0, 0.15)'} 2px 3px 15px;
+        props.incomingMessage
+          ? "rgba(32, 112, 198, 0.4)"
+          : "rgba(0, 0, 0, 0.15)"}
+      2px 3px 15px;
     border-radius: ${(props) =>
-      props.incomingMessage ? '0 8px 8px 8px' : '8px 0 8px 8px'};
+      props.incomingMessage ? "0 8px 8px 8px" : "8px 0 8px 8px"};
   }
 `;
+
 
 const UserProfile = styled.div`
   display: flex;
@@ -52,7 +77,7 @@ const UserProfile = styled.div`
   height: 100%;
 
   &::before {
-    content: '${(props) => getFirstLetter(props.content)}';
+    content: "";
     display: grid;
     place-content: center;
     padding: 0.5em;
@@ -60,8 +85,10 @@ const UserProfile = styled.div`
     height: 1.3em;
     border-radius: 50%;
     background: var(--secondry-color-dark-palette);
+    background-size: cover;
   }
 `;
+
 
 const BotMessage = styled.div`
   width: fit-content;
@@ -89,6 +116,8 @@ const Conversation = () => {
 
   });
 
+  console.log(data)
+
   useEffect(() => {
     const conversationRef = chatConversation.current;
 
@@ -112,14 +141,19 @@ return <div> <MessageContainer>{"Loading..."}</MessageContainer></div>;
     return <div><MessageContainer>{"Error occurred while fetching data"}</MessageContainer></div>
   }
 
+
   return (
     <ConversationContainer ref={chatConversation}>
       {data.map((m, index) => {
         const { chatMessage, user } = m;
+
+        if(user!==address){
+          console.log(true)
+        }
         return (
           <MessageContainer
             key={index}
-            incomingMessage={user !== address}
+            incomingMessage = {user !== address}
           >
             <UserProfile content={user} />
             <MessageContent>{chatMessage}</MessageContent>

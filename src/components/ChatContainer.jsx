@@ -19,7 +19,7 @@ const ChatAppContainer = styled.div`
   height: 100vh;
   width: 100vw;
   justify-content: space-between;
-  //   background: #194185;
+    // background: #194185;
   background: #ebe8e8;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
@@ -125,7 +125,6 @@ const ChatContainer = () => {
               </Header>
 
               <Conversation />
-
               <ChatForm />
             </>
           )}

@@ -126,16 +126,18 @@ const Conversation = () => {
     }
   }, [data]);
 
-  useEffect(() => {
-    const conversationRef = chatConversation.current;
+  // useEffect(() => {
+  //   const conversationRef = chatConversation.current;
 
-    if (conversationRef) {
-      conversationRef.scrollTo(0, conversationRef.scrollHeight);
-    }
-    return () => {
+  //   if (conversationRef) {
+  //     conversationRef.scrollTo(0, conversationRef.scrollHeight);
+  //   }
+  //   return () => {
    
-      };
-    }, [chatMessages]);
+  //     };
+  //   }, [chatMessages]);
+
+
 
   if (!groupName) {
     return <div> <MessageContainer>{"Please select a group"}</MessageContainer></div>;
@@ -159,13 +161,15 @@ return <div> <MessageContainer>{"Loading..."}</MessageContainer></div>;
           console.log(true)
         }
         return (
-          <MessageContainer
-            key={index}
-            incomingMessage = {user !== address}
-          >
+          <>
+          <MessageContainer key={index} incomingMessage={user !== address}>
             <UserProfile content={user} />
+            <div className={{display:'flex'}}> 
             <MessageContent>{chatMessage}</MessageContent>
+            <p style={{color:'grey',fontSize:'9px',marginTop:'5px',marginLeft:'10px'}}>10:10 <span>Am</span></p>
+            </div>
           </MessageContainer>
+          </>
         );
       })}
     </ConversationContainer>

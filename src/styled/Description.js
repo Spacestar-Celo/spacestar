@@ -7,6 +7,5 @@ export const Description = styled.p `
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: ${ props => props.size };
-    
     color: ${ props => props.color }
 `;

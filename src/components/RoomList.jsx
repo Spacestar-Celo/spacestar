@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useChat } from "../context/ChatProvider";
 import useDebounce from "../hooks/useDebounce";
 import { Description } from "../styled/Description";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { GiHamburgerMenu, GiCancel, GiCoins, GiTwoCoins } from "react-icons/gi";
 import { ChatContext } from "../context/ChatProvider";
 
 const RoomListContainer = styled.div`
@@ -18,11 +18,11 @@ const RoomListContainer = styled.div`
   overflow: auto;
   // border-top-left-radius: 45px;
   // border-bottom-left-radius: 45px;
-  background: var(--blue-gradient);
+  // background: var(--blue-gradient);
+  background: #194185;
   color: #fff;
   position: absolute;
   right: 0%;
-
 
   & h3 {
     font-size: 1.2em;
@@ -175,7 +175,7 @@ const RoomList = ({ query, isNavOpen, setIsNavOpen }) => {
         <h3>
           <b>Help Rooms</b>
         </h3>
-        <GiHamburgerMenu
+        <GiCancel
           size="25px"
           onClick={() => {
             setIsRoomOpen(!isRoomOpen);
@@ -188,23 +188,33 @@ const RoomList = ({ query, isNavOpen, setIsNavOpen }) => {
           const { id, name, src, description } = room;
 
           return (
-            <RoomItem
-              //   active={currentRoom?.id === id}
-              key={id}
-              onClick={() => {
-                setIsRoomOpen(false);
-                handleRoomClick(id);
-              }}
-            >
-              <img alt="room-img" src={src} />
+            <>
+              <RoomItem
+                //   active={currentRoom?.id === id}
+                key={id}
+                onClick={() => {
+                  setIsRoomOpen(false);
+                  handleRoomClick(id);
+                }}
+              >
+                <img alt="room-img" src={src} />
 
-              <div>
-                <span>{name}</span>
-                <Description color="rgba(254,254,254,0.5)" size="0.7em">
-                  {description}
-                </Description>
-              </div>
-            </RoomItem>
+                <div>
+                  <span>{name}</span>
+                  <Description color="rgba(254,254,254,0.5)" size="0.7em">
+                    {description}
+                  </Description>
+
+                  <div
+                    style={{
+                      border: "1px solid rgba(254,254,254,0.1)",
+                      marginTop: "10px",
+                      paddingLeft: "10px",
+                    }}
+                  ></div>
+                </div>
+              </RoomItem>
+            </>
           );
         })}
       </ul>

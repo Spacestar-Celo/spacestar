@@ -11,9 +11,10 @@ const Navroutes = () => {
     <>
     <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/dashboard' element={<Dashboard/>} />
-        <Route path='/claim' element={<Commingsoon />} />
-        <Route path='/donate' element={<Donate />} />
+        <Route path='/dashboard' element={<Dashboard/>} >
+        <Route path='claim' element={<Commingsoon />} />
+        <Route path='donate' element={<Donate />} />
+        </Route>
     </Routes>
     </>
   )

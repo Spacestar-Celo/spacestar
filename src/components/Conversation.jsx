@@ -154,10 +154,6 @@ return <div> <MessageContainer>{"Loading..."}</MessageContainer></div>;
     <ConversationContainer ref={chatConversation}>
       {chatMessages.map((m, index) => {
         const { chatMessage, user } = m;
-
-        if(user!==address){
-          console.log(true)
-        }
         return (
           <MessageContainer
             key={index}

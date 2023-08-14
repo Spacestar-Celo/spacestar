@@ -20,7 +20,7 @@ const Wrapper = () => {
                 ! isConnected
                 ?
                 <Home />
-                :
+                : 
                 <ChatContainer />
             }
         </WrapperContainer>

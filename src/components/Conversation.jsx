@@ -126,16 +126,16 @@ const Conversation = () => {
     }
   }, [data]);
 
-  // useEffect(() => {
-  //   const conversationRef = chatConversation.current;
+  useEffect(() => {
+    const conversationRef = chatConversation.current;
 
-  //   if (conversationRef) {
-  //     conversationRef.scrollTo(0, conversationRef.scrollHeight);
-  //   }
-  //   return () => {
+    if (conversationRef) {
+      conversationRef.scrollTo(0, conversationRef.scrollHeight);
+    }
+    return () => {
    
-  //     };
-  //   }, [chatMessages]);
+      };
+    }, [chatMessages]);
 
 
 

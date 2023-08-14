@@ -102,7 +102,6 @@ const ChatContainer = () => {
   const { isRoomOpen, toggle, openMenu, closeMenu } = useContext(ChatContext);
 
   const { pathname } = useLocation();
-  console.log(pathname);
 
   return (
     <ChatAppContainer>
@@ -145,8 +144,6 @@ const ChatContainer = () => {
       {isRoomOpen ? (
         <RoomList
           query={query}
-          // isNavOpen={ isNavOpen }
-          // setIsNavOpen={ setIsNavOpen }
           active={true}
         />
       ) : null}

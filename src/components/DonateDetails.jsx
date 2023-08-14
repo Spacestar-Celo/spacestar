@@ -1,36 +1,52 @@
-import React from "react";
-import Qrcode from "../assets/qrcode.png";
+import React, { useState, useEffect } from "react";
+import QRCode from "qrcode"; 
 import styled from "styled-components";
 
 const DonateDetails = ({ cryptoCoin, cryptoShort }) => {
   const handleCopy = (id) => {
     navigator.clipboard.writeText(id);
-    alert("User ID copied to clipboard!");
-    console.log(text);
+    alert("Wallet address copied to clipboard!");
   };
 
-  const walletAddress = "0xkdi09344385848ujr48uijr4r5u3i48548t8";
+  const walletAddress = "0x546A5cB5c0AdD53efbC60000644AA70204B20576";
+  const [qrCodeDataUrl, setQrCodeDataUrl] = useState("");
+
+  const generateQRCode = async () => {
+    try {
+      const dataUrl = await QRCode.toDataURL(walletAddress);
+      setQrCodeDataUrl(dataUrl);
+    } catch (error) {
+      console.error("QR Code Generation Error:", error);
+    }
+  };
+
+
+  useEffect(() => {
+    generateQRCode(); 
+  }, []);
+
 
   return (
     <>
       <DonateStyle>
         <QrCodeImg>
-          <img src={Qrcode} alt="" />
+          {qrCodeDataUrl ? (
+            <img src={qrCodeDataUrl} alt="QR Code" />
+          ) : (
+            <p>Loading QR code...</p>
+          )}
         </QrCodeImg>
         <article>
           <h2>Donate {cryptoCoin} to this address</h2>
           <p>
-            Scan the Qr code or copy the address below into your wallet to send
+            Scan the QR code or copy the address below into your wallet to send
             some {cryptoCoin}
           </p>
           <p>
             <span>Tag/Note:-</span> {cryptoShort} Donations
           </p>
           <WalletAddress>{walletAddress}</WalletAddress>
-          <CopyButton
-            onClick={() => handleCopy(walletAddress)}
-            text={walletAddress}
-          >
+          <CopyButton onClick={() => handleCopy(walletAddress)}>
             Copy
           </CopyButton>
         </article>

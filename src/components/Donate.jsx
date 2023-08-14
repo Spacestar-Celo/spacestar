@@ -1,10 +1,14 @@
 import { useState } from "react";
 import styled from "styled-components";
 import DonateDetails from "./DonateDetails";
+import usdc from "../assets/usdc.png"
+import tether from "../assets/tether.png"
+import ethereum from "../assets/ethereum.png"
+import celo from "../assets/celo.png"
 
 function Donate() {
-  const [cryptoCoin, setCryptoCoin] = useState("Bitcoin");
-  const [cryptoShort, setCrpto] = useState("BTC");
+  const [cryptoCoin, setCryptoCoin] = useState("Celo");
+  const [cryptoShort, setCrpto] = useState("CELO");
   const [active, setActive] = useState(true);
   const [activeTab, setActiveTab] = useState(1);
 
@@ -17,43 +21,80 @@ function Donate() {
   return (
     <>
       <DonatePage>
-        <h1>Pls Donate Abeg</h1>
-        <div>
+        <h1>Support What we're building</h1>
+        <div style={{ display: 'flex',  justifyContent: 'center' }}>
           <DonateButton
             onClick={() => {
-              setCryptoCoin("Bitcoin");
-              setCrpto("BTC");
+              setCryptoCoin("Celo");
+              setCrpto("CELO");
               setActive(true);
               handleTabClick(1);
             }}
           >
-            Bitcoin
+            <img src={celo}
+           alt="" 
+            style={{
+            width: '18%',
+          }}
+          />
           </DonateButton>
+
           <DonateButton
             onClick={() => {
-              setCryptoCoin("Etherium");
+              setCryptoCoin("Ethereum");
               setCrpto("ETH");
               setActive(true);
               handleTabClick(2);
             }}
           >
-            Etherium
+          <img src={ethereum}
+           alt="" 
+            style={{
+            width: '18%',
+            marginLeft: '-270px'
+          }}
+          />
           </DonateButton>
+
           <DonateButton
             onClick={() => {
-              setCryptoCoin("Xrp");
-              setCrpto("XRP");
+              setCryptoCoin("Tether");
+              setCrpto("USDT");
               setActive(true);
               handleTabClick(3);
             }}
           >
-            Xrp
+          <img src={tether}
+           alt="" 
+            style={{
+            width: '30%',
+            marginLeft: '-500px'
+          }}
+          />
+          </DonateButton>
+
+          <DonateButton
+            onClick={() => {
+              setCryptoCoin("USD Coin");
+              setCrpto("USDC");
+              setActive(true);
+              handleTabClick(4);
+            }}
+          >
+            <img src={usdc}
+           alt="" 
+            style={{
+            width: '30%',
+            marginLeft: '-650px'
+          }}
+          />
           </DonateButton>
         </div>
         <Detail>
           {activeTab === 1 && <DonateDetails cryptoCoin={cryptoCoin} cryptoShort={cryptoShort} />}
           {activeTab === 2 && <DonateDetails cryptoCoin={cryptoCoin} cryptoShort={cryptoShort} />}
           {activeTab === 3 && <DonateDetails cryptoCoin={cryptoCoin} cryptoShort={cryptoShort} />}
+          {activeTab === 4 && <DonateDetails cryptoCoin={cryptoCoin} cryptoShort={cryptoShort} />}
         </Detail>
       </DonatePage>
     </>
@@ -75,7 +116,7 @@ const DonatePage = styled.section`
 
   & h1 {
     margin-bottom: 20px;
-    font-size: 30px;
+    font-size: 25px;
     color: #161616;
   }
 `;

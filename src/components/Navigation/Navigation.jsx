@@ -110,9 +110,11 @@ const Navigation = ({ openRoomNav }) => {
         >
           <Nav>
             <LogoImg>
+            <Link to="/">
               <div>
                 <img src={Logo} alt="Spacetar Logo" />
               </div>
+              </Link>
               <CancelIcon
                 onClick={() => {
                   setIsMenuOpen(!isMenuOpen);
@@ -128,7 +130,7 @@ const Navigation = ({ openRoomNav }) => {
                 setIsMenuOpen(!isMenuOpen);
               }}
             >
-              <Link to="/">
+              <Link to="/dashboard">
                 <AiFillHome size="25px" />
                 <p>
                   <b>Home</b>

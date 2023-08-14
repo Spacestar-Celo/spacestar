@@ -1,71 +1,66 @@
-import React from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
-import Commingsoon from './ComingSoon/ComingSoon';
-
-const GlobalStyle = createGlobalStyle`
-  :root {
-    --main-color-dark-palette: ##194185;
-    --secondry-color-dark-palette: #373737;
-    --blue-button-color: ##194185;
-    --blue-active-color: ##194185;
-    --blue-gradient: linear-gradient(90deg, #3c95f4 65%, #3385dc 100%);
-  }
-
-  * {
-    margin: 0;
-    padding: 0;
-    outline: transparent;
-    text-decoration: none;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-  }
-
-  body {
-    background: var(--blue-gradient);
-  }
-`;
-
-const Background = styled.div`
-position: absolute;
-height: 100vh;
-width: 100vw;
-overflow: hidden;
-z-index: -1;
-
-&::before, &::after {
-    content: '';
-    position: absolute;
-    inset: -170px auto auto -200px;
-    width: clamp(30vw, 600px, 42vw);
-    height: clamp(30vw, 600px, 42vw);
-    border-radius: 50%;
-    background: #1e6dbf;
-    z-index: -1;
-  }
-
-  &::after {
-    inset: auto -170px -200px auto;
-  }
-
-  @media (max-width: 820px) {
-    &::before, &::after {
-      width: 25rem;
-      height: 25rem;
-    }
-  }
-`;
+import { useState } from "react";
+import styled from "styled-components";
+import ClaimDetails from "./ClaimDetails";
 
 function Claim() {
+
+  const [activeTab, setActiveTab] = useState(1);
+  
   return (
     <>
-      <GlobalStyle />
-      
-      <Background />
-      {/* <div><LoginButton /></div> */}
-      <Commingsoon />
-
+      <DonatePage>
+        <div>
+        </div>
+        <Detail>
+          {activeTab === 1 && <ClaimDetails />}
+        </Detail>
+      </DonatePage>
     </>
   );
 }
 
 export default Claim;
+
+const DonatePage = styled.section`
+  // border: 1px solid black;
+  height: 100%;
+  border-radius: 5px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  // align-items:center;
+  justify-content: center;
+  padding: 0 40px;
+
+  & h1 {
+    margin-bottom: 20px;
+    font-size: 25px;
+    color: #161616;
+  }
+`;
+
+const Detail = styled.div`
+  display: flex;
+  align-items: center;
+  background: #f0f0f0;
+  padding: 20px;
+  color: grey;
+
+  & img {
+    width: 100%;
+  }
+
+  & h2 {
+    margin-bottom: 10px;
+    color: #161616;
+  }
+  & p {
+    margin-bottom: 10px;
+  }
+
+  & span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #161616;
+  }
+`;

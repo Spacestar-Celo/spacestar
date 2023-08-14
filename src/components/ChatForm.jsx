@@ -4,7 +4,11 @@ import { IoIosSend } from "react-icons/io";
 import { Spinner } from "@chakra-ui/react";
 import { ButtonContainer } from "../styled/Button";
 import { useChat } from "../context/ChatProvider";
-import { useContractWrite, usePrepareContractWrite } from "wagmi";
+import { 
+  useContractWrite, 
+  usePrepareContractWrite,
+  useWaitForTransaction 
+ } from "wagmi";
 import { ContractABI } from "../utils/SpacestarABI";
 
 const MessageForm = styled.form`
@@ -40,7 +44,10 @@ const ChatForm = () => {
   });
 
   const { data, isLoading, isSuccess, write } = useContractWrite(config);
-
+  const { isLoading: waitTransaction } = useWaitForTransaction({
+    hash: data?.hash,
+    timeout: 10_000, // 
+  })
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -65,9 +72,10 @@ const ChatForm = () => {
       {/* <ButtonContainer flex="0" padding="0" active="true" size="2.2em"> */}
       <Button
         onClick={onSubmit}
-        disabled={isLoading || chatMessage.trim() === ""}
+        disabled={isLoading || waitTransaction || chatMessage.trim() === ""}
       >
-        {isLoading ? (
+      
+        {isLoading || waitTransaction ? (
           <Spinner speed="0.65s" color="blue" size="lg" />
         ) : (
           <IoIosSend fill="blue" size="1.5em" />

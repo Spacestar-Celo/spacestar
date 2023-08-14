@@ -12,6 +12,7 @@ import {
 import styled from 'styled-components';
 import { ButtonContainer } from '../styled/Button';
 import { useChat } from '../context/ChatProvider';
+import { NavBarConnectButton } from '../connect-wallet/navbar-connectButton';
 
 const Nav = styled.nav`
     display: flex;
@@ -81,6 +82,13 @@ const Navigation = ({ openRoomNav }) => {
                     </a>
             </ButtonContainer>
             <p><b>Exit Room</b></p>
+
+            <ButtonContainer>
+                <NavBarConnectButton />
+            </ButtonContainer>
+
+            <NavBarConnectButton />
+
 
         </Nav>
     );

@@ -126,16 +126,16 @@ const Conversation = () => {
     }
   }, [data]);
 
-  // useEffect(() => {
-  //   const conversationRef = chatConversation.current;
+  useEffect(() => {
+    const conversationRef = chatConversation.current;
 
-  //   if (conversationRef) {
-  //     conversationRef.scrollTo(0, conversationRef.scrollHeight);
-  //   }
-  //   return () => {
+    if (conversationRef) {
+      conversationRef.scrollTo(0, conversationRef.scrollHeight);
+    }
+    return () => {
    
-  //     };
-  //   }, [chatMessages]);
+      };
+    }, [chatMessages]);
 
 
 
@@ -156,10 +156,6 @@ return <div> <MessageContainer>{"Loading..."}</MessageContainer></div>;
     <ConversationContainer ref={chatConversation}>
       {chatMessages.map((m, index) => {
         const { chatMessage, user } = m;
-
-        if(user!==address){
-          console.log(true)
-        }
         return (
           <>
           <MessageContainer key={index} incomingMessage={user !== address}>

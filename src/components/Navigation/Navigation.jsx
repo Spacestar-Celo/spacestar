@@ -17,11 +17,11 @@ import { LoginButton } from "../../connect-wallet/connectButton";
 import { ChatContext } from "../../context/ChatProvider";
 import "./Navigation.css";
 import { NavBarConnectButton } from "../../connect-wallet/navbar-connectButton";
+import { Link } from "react-router-dom";
 
 const Nav = styled.nav`
   display: flex;
   flex-direction: column;
-
   // width: 14.75em;
   // height: 100vh;
   gap: 30px;
@@ -110,9 +110,11 @@ const Navigation = ({ openRoomNav }) => {
         >
           <Nav>
             <LogoImg>
+            <Link to="/">
               <div>
                 <img src={Logo} alt="Spacetar Logo" />
               </div>
+              </Link>
               <CancelIcon
                 onClick={() => {
                   setIsMenuOpen(!isMenuOpen);
@@ -128,12 +130,12 @@ const Navigation = ({ openRoomNav }) => {
                 setIsMenuOpen(!isMenuOpen);
               }}
             >
-              <a href="/">
+              <Link to="/dashboard">
                 <AiFillHome size="25px" />
                 <p>
                   <b>Home</b>
                 </p>
-              </a>
+              </Link>
             </ButtonContainer>
 
             <ButtonContainer
@@ -142,12 +144,12 @@ const Navigation = ({ openRoomNav }) => {
                 setIsMenuOpen(!isMenuOpen);
               }}
             >
-              <a href="/claim">
+              <Link to="claim">
                 <GiTwoCoins size="25px" />
                 <p>
                   <b>Claim </b>
                 </p>
-              </a>
+              </Link>
             </ButtonContainer>
 
             <ButtonContainer
@@ -156,12 +158,12 @@ const Navigation = ({ openRoomNav }) => {
                 setIsMenuOpen(!isMenuOpen);
               }}
             >
-              <a href="/donate">
+              <Link to="donate">
                 <GiReceiveMoney size="25px" />
                 <p>
                   <b>Donate </b>
                 </p>
-              </a>
+              </Link>
             </ButtonContainer>
 
             <ButtonContainer
@@ -171,12 +173,12 @@ const Navigation = ({ openRoomNav }) => {
                 leaveClickHandler();
               }}
             >
-              <a href="#">
+              <Link to="#">
                 <GiExitDoor size="25px" />
                 <p>
                   <b>Exit Room</b>
                 </p>
-              </a>
+              </Link>
             </ButtonContainer>
           </Nav>
           <div className="connect-btn">

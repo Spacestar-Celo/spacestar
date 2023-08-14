@@ -9,6 +9,9 @@ import { useChat } from "../context/ChatProvider";
 import { Description } from "../styled/Description";
 import { LoginButton } from "../connect-wallet/connectButton";
 import { ChatContext } from "../context/ChatProvider";
+import { useLocation } from "react-router-dom";
+import Claim from "./Claim";
+import Donate from "./Donate";
 
 const ChatAppContainer = styled.div`
   --vertical-padding: 3vh;
@@ -19,7 +22,7 @@ const ChatAppContainer = styled.div`
   height: 100vh;
   width: 100vw;
   justify-content: space-between;
-    // background: #194185;
+  // background: #194185;
   background: #ebe8e8;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
@@ -43,6 +46,7 @@ const CenterContainer = styled.div`
   height: 100%;
   margin: auto 0;
   padding: 1vw 1vw;
+  // display: none;
 
   @media (max-width: 820px) {
     height: 80%;
@@ -97,45 +101,49 @@ const ChatContainer = () => {
 
   const { isRoomOpen, toggle, openMenu, closeMenu } = useContext(ChatContext);
 
+  const { pathname } = useLocation();
+
   return (
     <ChatAppContainer>
       <Navigation openRoomNav={() => setIsNavOpen(true)} />
 
       <CenterContainer>
-        <SearchRooms query={query} setQuery={setQuery} />
+        {pathname === "/dashboard" ? (
+          <Chat>
+            <SearchRooms query={query} setQuery={setQuery} />
+            {!currentRoom ? (
+              <WelcomeMessage>
+                Come join the fun! <br /> <br /> Share your thoughts, emotions,
+                and experiences, <br /> knowing that you are not alone.
+                <br /> <br /> See you inside! 🙋🏽‍♂️
+              </WelcomeMessage>
+            ) : (
+              <>
+                <Header>
+                  <img alt="room-img" src={currentRoom.src} />
 
-        <Chat>
-          {!currentRoom ? (
-            <WelcomeMessage>
-              Come join the fun! <br /> <br /> Share your thoughts, emotions,
-              and experiences, <br /> knowing that you are not alone.
-              <br /> <br /> See you inside! 🙋🏽‍♂️
-            </WelcomeMessage>
-          ) : (
-            <>
-              <Header>
-                <img alt="room-img" src={currentRoom.src} />
-
-                <div>
-                  <h2>{currentRoom.name}</h2>
-                  <Description color="#000" size="0.75em">
-                    {currentRoom.description}
-                  </Description>
-                </div>
-              </Header>
-
-              <Conversation />
-              <ChatForm />
-            </>
-          )}
-        </Chat>
+                  <div>
+                    <h2>{currentRoom.name}</h2>
+                    <Description color="#000" size="0.75em">
+                      {currentRoom.description}
+                    </Description>
+                  </div>
+                </Header>
+                <Conversation />
+                <ChatForm />
+              </>
+            )}
+          </Chat>
+        ) : pathname === "/dashboard/claim" ? (
+          <Claim />
+        ) : pathname === "/dashboard/donate" ? (
+          <Donate />
+        ) : null}
       </CenterContainer>
 
       {isRoomOpen ? (
         <RoomList
           query={query}
-          // isNavOpen={ isNavOpen }
-          // setIsNavOpen={ setIsNavOpen }
           active={true}
         />
       ) : null}

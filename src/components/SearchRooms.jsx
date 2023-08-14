@@ -19,17 +19,23 @@ const SearchRoomsMain = styled.div`
 const SearchRoomsContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  background: #fff;
+  background: #194185;
   width: 45%;
   padding: 0.5em;
   border-radius: 1.2em;
+  margin-right: 12em;
   // float: right;
 
   & input {
     width: 85%;
     background: transparent;
     border: none;
-  }
+
+  }  
+  & ::placeholder {
+  color: #ffff;
+  opacity: 1; 
+}
 
   @media (max-width: 820px) {
     // display: none;
@@ -38,6 +44,7 @@ const SearchRoomsContainer = styled.div`
 
 const GiHamburger = styled.div`
   visibility: hidden;
+  
 
   @media (max-width: 820px) {
     visibility: visible;
@@ -68,11 +75,12 @@ const SearchRooms = ({ query, setQuery }) => {
           placeholder="Search Group"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          style={{ color: 'white' }}
         />
 
         {/* <ButtonContainer padding="0" active= 'true'  size="3em" > */}
         <a href="#">
-          <BiReset fill="194185" size={"1.1em"}></BiReset>
+          <BiReset fill="#FFFFFF" size={"1.1em"}></BiReset>
         </a>
         {/* </ButtonContainer> */}
       </SearchRoomsContainer>

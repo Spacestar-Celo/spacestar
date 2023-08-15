@@ -39,7 +39,7 @@ const ChatForm = () => {
   const { config } = usePrepareContractWrite({
     address: import.meta.env.VITE_CELO_CONTRACT,
     abi: ContractABI,
-    functionName: "sendChatMessage",
+    functionName: "sendGroupChatMessage",
     args: [chatMessage, currentRoom?.name],
   });
 

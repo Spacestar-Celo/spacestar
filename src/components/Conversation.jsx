@@ -148,21 +148,26 @@ return <div> <MessageContainer>{"Loading..."}</MessageContainer></div>;
   }
 
   if (isError) {
-    return <div><MessageContainer>{"Error occurred while fetching data"}</MessageContainer></div>
+    return <div  style={{color:'grey'}}><MessageContainer>{"Error occurred while fetching data"}</MessageContainer></div>
   }
 
 
   return (
     <ConversationContainer ref={chatConversation}>
       {chatMessages.map((m, index) => {
-        const { chatMessage, user } = m;
+        const { chatMessage, user, timestamp} = m;
+        var fixedTime = new Date(Number(timestamp) * 1000);
+        fixedTime = fixedTime.toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit',
+        })
         return (
           <>
           <MessageContainer key={index} incomingMessage={user !== address}>
             <UserProfile content={user} />
             <div className={{display:'flex'}}> 
             <MessageContent>{chatMessage}</MessageContent>
-            <p style={{color:'grey',fontSize:'9px',marginTop:'5px',marginLeft:'10px'}}>10:10 <span>Am</span></p>
+            <p style={{color:'grey',fontSize:'9px',marginTop:'5px',marginLeft:'10px'}}>{fixedTime}</p>
             </div>
           </MessageContainer>
           </>

@@ -119,7 +119,7 @@ const Conversation = () => {
 
   const groupName = currentRoom?.name;
 
-  const { data, isError, isLoading } = useContractRead({
+  const { data, isError, isLoading, refetch } = useContractRead({
     address: import.meta.env.VITE_CELO_CONTRACT,
     abi: ContractABI,
     functionName: 'getGroupChats',
@@ -140,10 +140,19 @@ const Conversation = () => {
     if (conversationRef) {
       conversationRef.scrollTo(0, conversationRef.scrollHeight);
     }
+    // No need to return anything
+  }, [chatMessages]);
+
+  // Automatically refetch data every 5 seconds (adjust as needed)
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      refetch({ throwOnError: false, cancelRefetch: false });
+    }, 5000);
+
     return () => {
-   
-      };
-    }, [chatMessages]);
+      clearInterval(intervalId);
+    };
+  }, []);
 
 
 

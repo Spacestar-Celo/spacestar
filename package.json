@@ -1,6 +1,9 @@
 {
   "name": "spacestar",
+  "description": "Custom Celo Composer project.",
   "private": true,
+  "author": "Celo",
+  "license": "MIT",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -40,5 +43,20 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "vite": "^4.3.9"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/celo-org/celo-composer.git"
+  },
+  "bugs": {
+      "url": "https://github.com/celo-org/celo-composer/issues"
+  },
+  "homepage": "https://github.com/celo-org/celo-composer/blob/main/README.md",
+  "workspaces": [
+      "packages/*"
+  ],
+  "keywords": [
+      "celo-composer",
+      "celo"
+  ]
 }

@@ -160,6 +160,7 @@ Join us in this transformative journey as we empower mental well-being, one conn
 - Link to Documentation by Bunzz Decipher: https://app.bunzz.dev/decipher/chains/44787/addresses/0xe03639b06be343bc0898faaa8463ecf6e5c14869
 - Link to Github Repo: https://github.com/Spacestar-Celo/spacestar-on-celo
 - Link to Spacetar DEMO Video: https://youtu.be/2Qd5SMr4o8Y
+- Link to Pitch Deck Video: https://youtu.be/WoisN1rAklc
 
 
 

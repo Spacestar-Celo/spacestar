@@ -156,6 +156,7 @@ Join us in this transformative journey as we empower mental well-being, one conn
 ## Useful Resources
 - Link to Deployed Website: https://spacestar-on-celo.vercel.app/
 - Contract Address (0xE03639b06Be343BC0898FAaA8463EcF6E5c14869)
+- Project ID: 274de4271228fdd69013c56274f0e688
 - Link to Verified Contract Address on CELO Alfajores: https://alfajores.celoscan.io/address/0xe03639b06be343bc0898faaa8463ecf6e5c14869#code
 - Link to Documentation by Bunzz Decipher: https://app.bunzz.dev/decipher/chains/44787/addresses/0xe03639b06be343bc0898faaa8463ecf6e5c14869
 - Link to Github Repo: https://github.com/Spacestar-Celo/spacestar-on-celo

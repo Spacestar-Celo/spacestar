@@ -6,6 +6,9 @@
 ## Inspiration
 The concept for Spacetar emerged from a profound aspiration to revolutionize mental well-being support. In a world where discussions about mental health are often stifled or limited, we recognized the need for a decentralized solution that could foster a safe, nurturing environment for individuals to openly share their emotions and experiences.
 
+## Watch the Spacetar Pitch Deck Video
+[![Watch the video](https://img.youtube.com/vi/WoisN1rAklc/0.jpg)](https://youtu.be/WoisN1rAklc)
+
 The driving force behind this project was the desire to create a community that not only understands but also celebrates the courage it takes to voice one's thoughts. 
 
 We envisioned Spacetar as a beacon of empathy and connection, where people from all walks of life could come together to embark on a journey of healing and empowerment.
